@@ -2,7 +2,7 @@
 This decorator is developed to easily cache any type of data, if input data can be converted to a string.
 
 Yuy can use it to decrease time of yor program running if it using slow data sores wise same requests,
-it can simplify yor program logic and debugging process.
+it can simplify your program logic and debugging process.
 
 For using this library you just need to add @cache_to_db decorator to yor function.
 
