@@ -38,7 +38,7 @@ class cache_to_db(object):
         self.caunter = 0
         if drop_table is True:
             self.cur.execute(f'DROP TABLE IF EXISTS {self.table_name}')
-            self.cur.execute(f'CREATE TABLE {self.table_name} (inp TEXT PRIMARY KEY, out TEXT)')
+            self.cur.execute(f'CREATE TABLE {self.table_name} (inp TEXT, out TEXT)')
         self.caunter = tuple(self.cur.execute(f'SELECT COUNT(*) FROM {table_name}'))[0][0]
         self.conn.commit()
         try:
