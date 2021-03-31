@@ -38,6 +38,10 @@ class cache_to_db(object):
         if drop_table is True:
             self.cur.execute(f'DROP TABLE IF EXISTS {self.table_name}')
             self.cur.execute(f'CREATE TABLE {self.table_name} (inp TEXT PRIMARY KEY, out TEXT)')
+        else:
+            if len(tuple(self.cur.execute(f'''
+            SELECT name FROM sqlite_master WHERE type='table' AND name='{self.table_name}' '''))) == 0:
+                self.cur.execute(f'CREATE TABLE {self.table_name} (inp TEXT PRIMARY KEY, out TEXT)')
         self.caunter = tuple(self.cur.execute(f'SELECT COUNT(*) FROM {self.table_name}'))[0][0]
         self.conn.commit()
         try:
@@ -47,11 +51,12 @@ class cache_to_db(object):
 
     def __call__(self, *args, **kwargs):
         inp = (args, kwargs,)
-        try:
-            pach_out = tuple(self.cur.execute(f'SELECT * FROM {self.table_name} WHERE inp=(?)', (str(inp))))[0][1]
+        out = tuple(self.cur.execute(f'''SELECT * FROM {self.table_name} WHERE inp=?''', (str(inp), )))
+        if len(out) == 1:
+            pach_out = out[0][1]
             with open(pach_out, 'rb') as f:
                 return pickle.load(f)
-        except:
+        else:
             out = self.f(*args, **kwargs)
             nuw_pach = self.pach + '/' + self.table_name + '/' + f'{self.caunter}'
             with open(nuw_pach, 'wb') as f:
