@@ -5,6 +5,7 @@ import pickle
 import os
 
 '''default settings'''
+
 pach = 'cached_files'
 drop_table = True
 db_name = 'db_cache'

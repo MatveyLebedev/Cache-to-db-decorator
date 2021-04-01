@@ -6,17 +6,15 @@ To use this library you just need to add @cache_to_db decorator to your function
 To change your settings you should use the settings function. 
 
 It has the following arguments: 
-
+```python
 pach = 'cached_files'
 
 drop_table = True
 
-table_name = 'Dump'
-
 db_name = 'db_cache'
 
 Example:
-
+settings(drop_table=False)
 @cache_to_db
 def caunt_cache(arr):
     for i in range(len(arr)):
@@ -29,3 +27,4 @@ def caunt(arr):
     return arr
 
 assert caunt_cache([1, 2, 3]) == caunt([1, 2, 3])
+...
