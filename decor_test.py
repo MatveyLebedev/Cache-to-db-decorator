@@ -1,4 +1,4 @@
-from cache_to_db_decorater import *
+from cache_to_db_decorator import *
 import numpy as np
 import json
 import requests
