@@ -23,7 +23,7 @@ def test_decor1():
     assert caunt([21, 21, 3]) == caunt_cache([21, 21, 3])
 
 
-def test_decor_set():
+def test_decor_settings():
     settings(drop_table=False)
     @cache_to_db
     def np_m_cache(arr):
@@ -34,7 +34,7 @@ def test_decor_set():
 
     assert np_m(np.array([1, 2, 3])).all() == np_m_cache(np.array([1, 2, 3])).all()
 
-def test_decot_time():
+def test_decot_time_reqest():
     settings(drop_table=False)
     @cache_to_db
     def get_data_cache():
